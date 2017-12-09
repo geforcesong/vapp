@@ -1,0 +1,17 @@
+.HomePage{
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+
+    .topCarousel{
+        padding: 0;
+        margin: 0;
+        &>div{
+            padding: 0;
+            margin: 0;
+        }
+    };
+};
+
+
+
