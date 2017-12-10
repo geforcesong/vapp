@@ -18,7 +18,8 @@ html(lang="en")
             @keyframes spin {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
 
     body(class=pageName)
-        div(id="application") {{message}}
+        div(id="application")
+            div(id="todoapp")
         div(class="spinner")
         script(type="text/javascript" src=`${server.cdnUrl}vendor.${version}.js`)
         script(type="text/javascript" src=`${server.cdnUrl}admin.${version}.js`)

@@ -1,17 +1,20 @@
 import Vue from 'vue';
-
+import {createRouter} from './router';
+import application from './application.vue';
 class AdminController {
     constructor() {
         this.app = this._createdApp();
     }
 
     _createdApp() {
+        const router = createRouter();
         const app = new Vue({
-            data: {
-                message: 'hello vue'
-            }
+            router,
+            render: h => h(application)
         });
-        app.$mount('#application');
+        document.head.removeChild(document.querySelector('#splash-spinner'));
+        document.body.removeChild(document.querySelector('.spinner'));
+        app.$mount('#todoapp');
         return app;
     }
 }

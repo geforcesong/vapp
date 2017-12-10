@@ -6,7 +6,7 @@ class RouteManager {
     static register(app) {
         RouteManager._registerOne(app, 'get', '/', new HomeController());
         RouteManager._registerOne(app, 'get', '/about', new AboutController());
-        RouteManager._registerOne(app, 'get', '/admin', new AdminController());
+        RouteManager._registerOne(app, 'get', /admin[a-z\/]*/, new AdminController());
     }
 
     static _registerOne(app, method, path, controller, controllerName = 'loadView') {

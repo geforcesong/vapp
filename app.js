@@ -7,8 +7,8 @@ class Server {
         this.app = express();
         this.app.set('views', path.join(__dirname, 'web', 'views'));
         this.app.set('view engine', 'pug');
-        RouteManager.register(this.app);
         this.app.use(express.static(path.join(__dirname, 'public')));
+        RouteManager.register(this.app);
     }
     run() {
         this.app.listen(3000, function () {

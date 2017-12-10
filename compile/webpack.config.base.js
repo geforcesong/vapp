@@ -37,6 +37,25 @@ module.exports = function (isDev) {
                             loader: 'sass-loader'
                         }]
                     })
+                },
+                {
+                    test: /\.vue$/,
+                    use: [
+                        {
+                            loader: 'vue-loader',
+                            options: {
+                                loaders: {
+                                    js: 'babel-loader'
+                                },
+                                preserveWhitespace: false
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.js$/,
+                    use: ['babel-loader'],
+                    exclude: /node_modules/
                 }
             ]
         },
