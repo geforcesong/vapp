@@ -6,3 +6,5 @@ dist
 npm-debug.log
 public/*.js
 public/*.css
+public/*.woff
+public/*.ttf

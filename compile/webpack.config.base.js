@@ -25,6 +25,10 @@ module.exports = function (isDev) {
         module: {
             rules: [
                 {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
+                },
+                {
                     test: /\.scss$/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
@@ -57,6 +61,10 @@ module.exports = function (isDev) {
                     test: /\.js$/,
                     use: ['babel-loader'],
                     exclude: /node_modules/
+                },
+                {
+                    test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)\w*/,
+                    use: ['file-loader']
                 }
             ]
         },

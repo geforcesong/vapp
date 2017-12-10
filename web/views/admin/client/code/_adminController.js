@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import {createRouter} from './router';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import application from './application.vue';
 class AdminController {
     constructor() {
@@ -8,6 +10,7 @@ class AdminController {
 
     _createdApp() {
         const router = createRouter();
+        Vue.use(ElementUI);
         const app = new Vue({
             router,
             render: h => h(application)
