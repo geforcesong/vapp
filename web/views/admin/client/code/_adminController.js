@@ -1,7 +1,19 @@
+import Vue from 'vue';
+
 class AdminController {
     constructor() {
-        console.log('Admin');
+        this.app = this._createdApp();
+    }
+
+    _createdApp() {
+        const app = new Vue({
+            data: {
+                message: 'hello vue'
+            }
+        });
+        app.$mount('#application');
+        return app;
     }
 }
 
-module.exports = new AdminController();
+new AdminController();
