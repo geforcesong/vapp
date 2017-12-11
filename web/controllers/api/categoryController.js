@@ -3,28 +3,32 @@ const CategoryFactory = require('../../fatories/categories/categoryFactory');
 class apiCategoryController extends BaseController {
     constructor() {
         super();
+        this.categoryFactory = new CategoryFactory();
     }
 
     async getCategories(req, res, next) {
         this.initialize(req, res, next);
-        const categoryFactory = new CategoryFactory();
-        const categories = await categoryFactory.getCategories();
+        
+        const categories = await this.categoryFactory.getCategories(req.query);
         this.sendJson(categories);
     }
 
-    createCategory(req, res, next) {
+    async createCategory(req, res, next) {
         this.initialize(req, res, next);
-        this.sendJson({categories: 2});
+        const category = await this.categoryFactory.createCategory(req.body);
+        this.sendJson(category);
     }
 
-    updateCategory(req, res, next) {
+    async updateCategory(req, res, next) {
         this.initialize(req, res, next);
-        this.sendJson({categories: 3});
+        const category = await this.categoryFactory.updateCategory(req.body);
+        this.sendJson(category);
     }
 
-    deleteCategory(req, res, next) {
+    async deleteCategory(req, res, next) {
         this.initialize(req, res, next);
-        this.sendJson({categories: 4});
+        const category = await this.categoryFactory.deleteCategory(req.body);
+        this.sendJson(category);
     }
 }
 
