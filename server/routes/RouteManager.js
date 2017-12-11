@@ -1,16 +1,19 @@
 const HomeController = require('../../web/controllers/homeController.js');
 const AboutController = require('../../web/controllers/aboutController.js');
 const AdminController = require('../../web/controllers/adminController.js');
+const BaseRouteManager = require('./BaseRouteManager');
+const CategoryRouteManager = require('./api/CategoryRouteManager');
 
-class RouteManager {
-    static register(app) {
-        RouteManager._registerOne(app, 'get', '/', new HomeController());
-        RouteManager._registerOne(app, 'get', '/about', new AboutController());
-        RouteManager._registerOne(app, 'get', /admin[a-z\/]*/, new AdminController());
+class RouteManager extends BaseRouteManager {
+    constructor(app) {
+        super(app);
     }
 
-    static _registerOne(app, method, path, controller, controllerName = 'loadView') {
-        app[method](path, controller[controllerName].bind(controller));
+    register() {
+        this._registerOne('get', '/', new HomeController());
+        this._registerOne('get', '/about', new AboutController());
+        this._registerOne('get', /admin[a-z\/]*/, new AdminController());
+        new CategoryRouteManager(this.app).register();
     }
 }
 

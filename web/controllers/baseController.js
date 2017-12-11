@@ -36,6 +36,10 @@ class BaseController {
             return this.res.send(html);
         });
     }
+
+    sendJson(model) {
+        return this.res.json(model);
+    }
 }
 
 module.exports = BaseController;
