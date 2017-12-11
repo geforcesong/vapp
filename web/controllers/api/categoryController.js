@@ -1,13 +1,15 @@
 const BaseController = require('../baseController');
-
+const CategoryFactory = require('../../fatories/categories/categoryFactory');
 class apiCategoryController extends BaseController {
     constructor() {
         super();
     }
 
-    getCategories(req, res, next) {
+    async getCategories(req, res, next) {
         this.initialize(req, res, next);
-        this.sendJson({categories: 1});
+        const categoryFactory = new CategoryFactory();
+        const categories = await categoryFactory.getCategories();
+        this.sendJson(categories);
     }
 
     createCategory(req, res, next) {

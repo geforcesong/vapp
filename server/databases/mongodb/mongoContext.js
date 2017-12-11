@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+const mongoClient = require('mongodb').MongoClient;
 const config = require('../../configuration/system.config.json');
 const UninitializedDbError = require('../../../utils/errors/UninitializedDbError');
 
@@ -13,7 +13,7 @@ class MongoContext {
         }
 
         return new Promise((resolve, reject) => {
-            MongoClient.connect(config.database.mongoConnectionString, (err, db) => {
+            mongoClient.connect(config.database.mongoConnectionString, (err, db) => {
                 if (err) {
                     return reject(err);
                 }
