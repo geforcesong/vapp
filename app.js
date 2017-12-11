@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const RouteManager = require('./server/routes/RouteManager');
+const mongoContext = require('./server/databases/mongodb/mongoContext.js');
 
 class Server {
     constructor() {
@@ -11,7 +12,9 @@ class Server {
         const routeManager = new RouteManager(this.app);
         routeManager.register();
     }
-    run() {
+    async run() {
+        await mongoContext.connect();
+
         this.app.listen(3000, function () {
             console.log('Typtscript Example app listening on port 3000!');
         });

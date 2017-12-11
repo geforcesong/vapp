@@ -22,6 +22,7 @@
     "element-ui": "^2.0.7",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
+    "mongodb": "^3.0.0-rc0",
     "popper.js": "^1.12.6",
     "pug": "^2.0.0-rc.4",
     "vue": "^2.5.9",

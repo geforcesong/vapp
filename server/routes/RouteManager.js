@@ -13,6 +13,10 @@ class RouteManager extends BaseRouteManager {
         this._registerOne('get', '/', new HomeController());
         this._registerOne('get', '/about', new AboutController());
         this._registerOne('get', /admin[a-z\/]*/, new AdminController());
+        this.registerForAPI();
+    }
+
+    registerForAPI() {
         new CategoryRouteManager(this.app).register();
     }
 }

@@ -7,7 +7,10 @@ class CategoryRouteManager extends BaseRouteManager {
     }
 
     register() {
-        this._registerOne('get', '/categories', new CategoryController(), 'getCategories');
+        this._registerOne('get', '/api/categories', new CategoryController(), 'getCategories');
+        this._registerOne('post', '/api/categories', new CategoryController(), 'createCategory');
+        this._registerOne('put', '/api/categories/:id', new CategoryController(), 'updateCategory');
+        this._registerOne('delete', '/api/categories/:id', new CategoryController(), 'deleteCategory');
     }
 }
 
