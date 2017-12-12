@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ccc from '../features/todos/index.vue';
+import todo from '../features/todos/index.vue';
+import category from '../features/categories/index.vue';
 
 Vue.use(Router);
 
@@ -8,11 +9,9 @@ export function createRouter() {
     return new Router({
         mode: 'history',
         routes: [
-            {
-                path: '/admin/todos',
-                component: ccc
-            },
-            {path: '*', redirect: '/admin/todos'}
+            {path: '/admin/todos', component: todo},
+            {path: '/admin/categories', component: category},
+            {path: '*', redirect: '/admin/categories'}
         ]
     });
 }

@@ -69,7 +69,7 @@ module.exports = function (isDev) {
             ]
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js'],
+            extensions: ['.tsx', '.ts', '.js', '.vue'],
             alias: {
                 vue: 'vue/dist/vue.common.js'
             }

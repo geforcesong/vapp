@@ -17,6 +17,8 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import '../../../common/client/style/colors.scss';
+
 .el-menu-item{
     border-bottom: 1px solid #e6e6e6;
     &:last-child{
@@ -25,7 +27,11 @@ export default {};
 }
 
 .nav-link{
-    color:#409EFF;
+    color:$color-a;
     text-decoration:none;
+}
+
+.el-main{
+    padding: 0px;
 }
 </style>
