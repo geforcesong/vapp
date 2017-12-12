@@ -17,7 +17,7 @@ class AdminController {
         });
         document.head.removeChild(document.querySelector('#splash-spinner'));
         document.body.removeChild(document.querySelector('.spinner'));
-        app.$mount('#todoapp');
+        app.$mount('#application');
         return app;
     }
 }
