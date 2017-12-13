@@ -2,7 +2,7 @@
     el-container
         categoryForm(ref="categoryForm")
         el-header
-            h1 Categories
+            h1 Categories{{count}}
         el-main
             el-row
                 el-col(:span="24")
@@ -15,6 +15,12 @@ export default {
   methods:{
       createCategory(){
           this.$refs.categoryForm.open();
+          return this.$store.commit('categories/increment');
+      }
+  },
+  computed:{
+      count(){
+          return this.$store.state.categories.count;
       }
   },
   components:{

@@ -23,7 +23,9 @@ export default {
       this.displayDialog = true;
     },
     save() {},
-    close() {}
+    close() {
+        this.displayDialog = false;
+    }
   }
 };
 </script>
