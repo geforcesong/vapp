@@ -13,9 +13,11 @@ import categoryForm from "./components/categoryForm";
 import { mapActions, mapGetters } from 'vuex'
 export default {
   methods:{
+      ...mapActions('categories', ['updateCount']),
       createCategory(){
           this.$refs.categoryForm.open();
-          return this.$store.commit('categories/increment');
+          //return this.$store.commit('categories/increment');
+          this.updateCount(4);
       }
   },
   computed:{
