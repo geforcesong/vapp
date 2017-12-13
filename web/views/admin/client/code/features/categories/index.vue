@@ -10,7 +10,7 @@
 </template>
 <script>
 import categoryForm from "./components/categoryForm";
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
   methods:{
       createCategory(){
@@ -19,9 +19,10 @@ export default {
       }
   },
   computed:{
-      count(){
-          return this.$store.state.categories.count;
-      }
+      ...mapGetters('categories', ['count'])
+    //   count(){
+    //       return this.$store.state.categories.count;
+    //   }
   },
   components:{
       categoryForm
