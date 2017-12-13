@@ -14,11 +14,9 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   methods:{
       ...mapActions('categories', ['updateCount']),
-      async createCategory(){
+      createCategory(){
           this.$refs.categoryForm.open();
           //return this.$store.commit('categories/increment');
-          let k = await this.updateCount(4);
-          alert(k);
       }
   },
   computed:{

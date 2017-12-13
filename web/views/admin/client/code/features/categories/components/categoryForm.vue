@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -17,12 +18,21 @@ export default {
     };
   },
   methods: {
+    ...mapActions('categories', ['createCategory']),
     open() {
       this.isEdit = false;
       this.title = "Create new category";
       this.displayDialog = true;
     },
-    save() {},
+    save() {
+      const category = {
+        name: this.categoryName,
+        parentId: '',
+        isActive: true,
+        sortOrder: 1000
+      }
+      this.createCategory(category);
+    },
     close() {
         this.displayDialog = false;
     }

@@ -1,4 +1,4 @@
 export default {
-    cagegories: [1, 2, 3],
+    cagegories: [],
     count: 3
 };
