@@ -16,9 +16,6 @@ async function createCategory({commit}, category) {
             data: JSON.stringify(category),
             success: function(result) {
                 resolve(result);
-            },
-            error: function(error) {
-                reject(error);
             }
         });
     });

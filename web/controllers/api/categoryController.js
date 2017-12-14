@@ -15,8 +15,12 @@ class apiCategoryController extends BaseController {
     async createCategory(req, res, next) {
         this.initialize(req, res, next);
         this.categoryFactory = new CategoryFactory();
-        const ret = await this.categoryFactory.createCategory(req.body);
-        this.sendAPI(ret);
+        try {
+            const ret = await this.categoryFactory.createCategory(req.body);
+            this.sendAPI(ret);
+        } catch (err) {
+            this.sendAPI(null, err);
+        }
     }
 
     async updateCategory(req, res, next) {

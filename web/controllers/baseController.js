@@ -42,9 +42,14 @@ class BaseController {
         return this.res.json(model);
     }
 
-    sendAPI(data) {
-        const ret = APIManager.getResponse(data);
-        this.sendJson(ret);
+    sendAPI(data, err) {
+        let result = null;
+        if (err) {
+            result = APIManager.getError(err);
+        } else {
+            result = APIManager.getResponse(data);
+        }
+        this.sendJson(result);
     }
 }
 
