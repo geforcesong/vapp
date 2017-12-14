@@ -1,3 +1,4 @@
+const APIManager = require('../../utils/apiManager');
 
 class BaseController {
     initialize(req, res, next) {
@@ -39,6 +40,11 @@ class BaseController {
 
     sendJson(model) {
         return this.res.json(model);
+    }
+
+    sendAPI(data) {
+        const ret = APIManager.getResponse(data);
+        this.sendJson(ret);
     }
 }
 

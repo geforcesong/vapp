@@ -12,14 +12,13 @@ async function createCategory({commit}, category) {
         $.ajax({
             type: 'POST',
             url: '/api/categories',
+            contentType: 'application/json',
             data: JSON.stringify(category),
-            contentType: 'application/json; charset=utf-8',
-            success: function(msg) {
-                console.log(msg);
+            success: function(result) {
+                resolve(result);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log('err...');
-                console.log(errorThrown);
+            error: function(error) {
+                reject(error);
             }
         });
     });

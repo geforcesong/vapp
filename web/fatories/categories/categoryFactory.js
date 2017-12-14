@@ -13,14 +13,13 @@ class CategoryFactory {
     }
 
     async createCategory(body) {
-        const category = await this.collection.insert({
-            name: body.name,
-            parentId: body.parentId,
-            isActive: true,
-            sortOrder: body.sortOrder,
-            createdTime: new Date()
-        });
-        return category;
+        const category = new Category(body);
+        const ret = await this.collection.insert(category);
+        if (ret.result && ret.result.ok === 1 && ret.result.n === 1) {
+            category._id = ret.insertedIds[0];
+            return category;
+        }
+        throw new Error('hahahah');
     }
 
     async updateCategory(body) {
