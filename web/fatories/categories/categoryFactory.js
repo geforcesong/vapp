@@ -2,6 +2,7 @@ const {COLLECTIONNAMES} = require('../../../utils/constants');
 const mongoContext = require('../../../server/databases/mongodb/mongoContext');
 const Category = require('../../dataModels/category');
 const MongoOperationError = require('../../../utils/errors/mongoOperationError');
+
 class CategoryFactory {
     constructor() {
         this.collection = mongoContext.collection(COLLECTIONNAMES.Categories);
@@ -15,7 +16,7 @@ class CategoryFactory {
     async createCategory(body) {
         const category = new Category(body);
         const ret = await this.collection.insert(category);
-        if (ret.result && ret.result.ok === 1 && ret.result.n === 1) {
+        if (ret.result && ret.result.ok === 1 && ret.result.n === 2) {
             category._id = ret.insertedIds[0];
             return category;
         }
