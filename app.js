@@ -1,19 +1,17 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const RouteManager = require('./server/routes/RouteManager');
 const mongoContext = require('./server/databases/mongodb/mongoContext.js');
 const accessLog = require('./server/expressCore/accessLog');
 const processError = require('./server/expressCore/processError');
 const expressError = require('./server/expressCore/expressError');
-
+const cookieBodyParser = require('./server/expressCore/cookieBodyParser');
 class Server {
     constructor() {
         this.app = express();
         this.app.set('views', path.join(__dirname, 'web', 'views'));
         this.app.set('view engine', 'pug');
-        this.app.use(bodyParser.json());
-        this.app.use(bodyParser.urlencoded({extended: false}));
+        cookieBodyParser(this.app);
         accessLog(this.app);
         this.app.use(express.static(path.join(__dirname, 'public')));
         const routeManager = new RouteManager(this.app);
