@@ -1,7 +1,7 @@
 const {COLLECTIONNAMES} = require('../../../utils/constants');
 const mongoContext = require('../../../server/databases/mongodb/mongoContext');
 const Category = require('../../dataModels/category');
-const MongoOperationError =  require('../../../utils/errors/mongoOperationError');
+const MongoOperationError = require('../../../utils/errors/mongoOperationError');
 class CategoryFactory {
     constructor() {
         this.collection = mongoContext.collection(COLLECTIONNAMES.Categories);
