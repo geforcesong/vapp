@@ -9,14 +9,17 @@ async function updateCount({commit}, val) {
 
 async function createCategory({commit}, category) {
     return new Promise((resolve, reject) => {
-        $.ajax({
-            type: 'POST',
-            url: '/api/categories',
-            contentType: 'application/json',
-            data: JSON.stringify(category),
-            success: function(result) {
-                resolve(result);
-            }
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/api/categories',
+        //     contentType: 'application/json',
+        //     data: JSON.stringify(category),
+        //     success: function(result) {
+        //         resolve(result);
+        //     }
+        // });
+        $.post('/api/categories', category).done((result)=>{
+            resolve(result);
         });
     });
 }
