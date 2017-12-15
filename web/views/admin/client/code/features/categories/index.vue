@@ -11,14 +11,16 @@
                 el-col(:span="24")
                     el-table(:data="categoryList" style="width: 100%")
                         el-table-column(prop="name" label="Name")
-                        el-table-column(prop="createdTime" label="createdTime" :formatter="formatDateTime")
+                        el-table-column(prop="isActive" label="IsActive")
+                        el-table-column(prop="sortOrder" label="Order")
+                        el-table-column(prop="createdTime" label="Created Time" :formatter="formatDateTime")
 </template>
 <script>
 import categoryForm from "./components/categoryForm";
 import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
-    ...mapActions("categories", ["updateCount"]),
+    ...mapActions("categories", ["updateCount", "loadCategory"]),
     createCategory() {
       this.$refs.categoryForm.open();
       //return this.$store.commit('categories/increment');
@@ -36,6 +38,9 @@ export default {
   },
   components: {
     categoryForm
+  },
+  created() {
+    this.loadCategory();
   }
 };
 </script>

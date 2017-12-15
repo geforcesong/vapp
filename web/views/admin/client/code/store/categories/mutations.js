@@ -2,9 +2,13 @@ function increment(state, status) {
     state.count++;
 }
 
-function addCategory(state, category) {
-    if (category) {
-        state.cagegories.push(category);
+function addCategory(state, categories) {
+    if (categories) {
+        if (Array.isArray(categories)) {
+            state.cagegories.push(...categories);
+        } else {
+            state.cagegories.push(categories);
+        }
     }
 }
 

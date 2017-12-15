@@ -28,7 +28,20 @@ async function createCategory({ commit }, category) {
     });
 }
 
+
+async function loadCategory({ commit }, category) {
+    return new Promise((resolve, reject) => {
+        $.get('/api/categories').done((res) => {
+            if (res && res.status === 0) {
+                commit('addCategory', res.result);
+                return resolve(res.result);
+            }
+            return reject(res.error);
+        });
+    });
+}
 export default {
     updateCount,
-    createCategory
+    createCategory,
+    loadCategory
 };
