@@ -23,12 +23,17 @@
     "element-ui": "^2.0.7",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.19.4",
     "mongodb": "^2.2.33",
+    "morgan": "^1.9.0",
     "popper.js": "^1.12.6",
     "pug": "^2.0.0-rc.4",
     "vue": "^2.5.9",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "winston": "^2.4.0",
+    "winston-daily-rotate-file": "^1.7.2"
   },
   "devDependencies": {
     "file-loader": "^1.1.5",

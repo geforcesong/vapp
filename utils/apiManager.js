@@ -8,7 +8,7 @@ class APIManager {
 
     static getError(err) {
         return {
-            result: err,
+            Error: err.toString(),
             status: -1
         };
     }
