@@ -5,6 +5,7 @@ const RouteManager = require('./server/routes/RouteManager');
 const mongoContext = require('./server/databases/mongodb/mongoContext.js');
 const accessLog = require('./server/expressCore/accessLog');
 const processError = require('./server/expressCore/processError');
+const expressError = require('./server/expressCore/expressError');
 
 class Server {
     constructor() {
@@ -17,6 +18,7 @@ class Server {
         this.app.use(express.static(path.join(__dirname, 'public')));
         const routeManager = new RouteManager(this.app);
         routeManager.register();
+        expressError(this.app);
     }
     async run() {
         await mongoContext.connect();

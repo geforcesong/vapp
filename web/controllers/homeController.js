@@ -7,6 +7,7 @@ class HomeController extends BaseController {
     }
 
     loadView(req, res, next) {
+        throw new Error('heeeee....')
         this.initialize(req, res, next);
         const homeModel = new HomeModel();
         this.renderPage('home/home.pug', homeModel);
