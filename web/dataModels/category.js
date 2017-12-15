@@ -6,6 +6,7 @@ class Category extends BaseData {
         this.parentId = raw.parentId;
         this.isActive = raw.isActive;
         this.sortOrder = raw.sortOrder;
+        this.createdTime = raw.createdTime;
     }
 }
 

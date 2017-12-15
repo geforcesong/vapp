@@ -19,9 +19,14 @@ export default {
   },
   methods: {
     ...mapActions('categories', ['createCategory']),
-    open() {
-      this.isEdit = false;
-      this.title = "Create new category";
+    open(category) {
+      this.isEdit = !!category;
+      if(!this.isEdit){
+        this.title = "Create new category";
+        this.categoryName = '';
+      } else{
+        this.categoryName = category.categoryName;
+      }
       this.displayDialog = true;
     },
     save() {
@@ -29,9 +34,11 @@ export default {
         name: this.categoryName,
         parentId: '',
         isActive: true,
-        sortOrder: 1000
+        sortOrder: 10000
       }
-      this.createCategory(category);
+      this.createCategory(category).then((c)=>{
+        this.displayDialog = false;
+      });
     },
     close() {
         this.displayDialog = false;

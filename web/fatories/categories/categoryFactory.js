@@ -1,7 +1,8 @@
-const {COLLECTIONNAMES} = require('../../../utils/constants');
+const { COLLECTIONNAMES } = require('../../../utils/constants');
 const mongoContext = require('../../../server/databases/mongodb/mongoContext');
 const Category = require('../../dataModels/category');
 const MongoOperationError = require('../../../utils/errors/mongoOperationError');
+const InvalidParamsError = require('../../../utils/errors/invalidParamsError');
 
 class CategoryFactory {
     constructor() {
@@ -14,6 +15,10 @@ class CategoryFactory {
     }
 
     async createCategory(body) {
+        if (!body) {
+            throw new InvalidParamsError('Category object can not be empty when creating.');
+        }
+        body.createdTime = new Date();
         const category = new Category(body);
         const ret = await this.collection.insert(category);
         if (ret.result && ret.result.ok === 1 && ret.result.n === 1) {
@@ -42,7 +47,7 @@ class CategoryFactory {
 
     async deleteCategory(body) {
         const category = new Category(body);
-        await this.collection.remove({_id: this.collection.toID(category._id)});
+        await this.collection.remove({ _id: this.collection.toID(category._id) });
         return category;
     }
 }

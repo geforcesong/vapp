@@ -1,4 +1,4 @@
-async function updateCount({commit}, val) {
+async function updateCount({ commit }, val) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             commit('increment');
@@ -7,7 +7,7 @@ async function updateCount({commit}, val) {
     });
 }
 
-async function createCategory({commit}, category) {
+async function createCategory({ commit }, category) {
     return new Promise((resolve, reject) => {
         // $.ajax({
         //     type: 'POST',
@@ -18,8 +18,12 @@ async function createCategory({commit}, category) {
         //         resolve(result);
         //     }
         // });
-        $.post('/api/categories', category).done((result)=>{
-            resolve(result);
+        $.post('/api/categories', category).done((res) => {
+            if (res && res.status === 0) {
+                commit('addCategory', res.result);
+                return resolve(res.result);
+            }
+            return reject(res.error);
         });
     });
 }
