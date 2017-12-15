@@ -16,7 +16,7 @@ class CategoryFactory {
     async createCategory(body) {
         const category = new Category(body);
         const ret = await this.collection.insert(category);
-        if (ret.result && ret.result.ok === 1 && ret.result.n === 2) {
+        if (ret.result && ret.result.ok === 1 && ret.result.n === 1) {
             category._id = ret.insertedIds[0];
             return category;
         }
