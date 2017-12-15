@@ -3,9 +3,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const RouteManager = require('./server/routes/RouteManager');
 const mongoContext = require('./server/databases/mongodb/mongoContext.js');
-const logger = require('./server/logging/logger');
 const accessLog = require('./server/expressCore/accessLog');
-const util = require('util');
+const processError = require('./server/expressCore/processError');
 
 class Server {
     constructor() {
@@ -28,17 +27,7 @@ class Server {
     }
 }
 
-process.on('unhandledRejection', function(reason, p) {
-    if (reason) {
-        logger.error(util.inspect(reason) + '\n' + reason.stack);
-    }
-});
-
-process.on('error', function(err) {
-    err.type = 'UnCaughtError';
-    var msg = err.stack ? util.format('[%s]: %s', err.type, err.stack) : util.format('[%s]: %s', err.type, err);
-    logger.error(msg);
-});
+processError();
 
 var server = new Server();
 server.run();
