@@ -9,19 +9,24 @@ class Logger {
         if (!fs.existsSync(config.logging.logPath)) {
             mkdirp.sync(config.logging.logPath);
         }
-        this.errorLog = this.createLogger('error');
-        this.accessLog = this.createLogger('access');
+        this.errorLog = this.createLogger('error', true);
+        this.accessLog = this.createLogger('access', false);
     }
 
-    createLogger(fileName) {
+    createLogger(fileName, needConsole) {
         let transport = new (winston.transports.DailyRotateFile)({
             filename: `${config.logging.logPath}/${fileName}`,
             datePattern: '-yyyy-MM-dd.log'
         });
+
+        let transports = [];
+        if (needConsole) {
+            transports.push(new (winston.transports.Console)());
+        }
+        transports.push(transport);
+
         let _logger = new (winston.Logger)({
-            transports: [
-                transport
-            ]
+            transports: transports
         });
         return _logger;
     }
