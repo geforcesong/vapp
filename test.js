@@ -7,7 +7,7 @@
 // }
 
 const MongoOperationError = require('./utils/errors/mongoOperationError');
-const ExtendableError = require('./utils/errors/ExtendableError');
+const ExtendableError = require('./utils/errors/ExtendableError.js');
 
 try {
     throw new MongoOperationError('sdfs');
