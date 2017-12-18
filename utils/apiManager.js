@@ -1,4 +1,6 @@
 const logger = require('../server/logging/logger');
+const ExtendableError = require('../utils/errors/extendableError');
+
 class APIResponse {
     constructor(status, result, error) {
         this.result = result;
@@ -16,7 +18,7 @@ class APIManager {
     static getError(err) {
         let message = err.toString();
         logger.error(message);
-        if (err.message) {
+        if (err instanceof ExtendableError) {
             message = err.message;
         }
         return new APIResponse(-1, null, message);
