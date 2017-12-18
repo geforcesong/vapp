@@ -1,10 +1,15 @@
 const mongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb');
 const config = require('../../configuration/system.config.json');
 const UninitializedDbError = require('../../../utils/errors/UninitializedDbError');
 
 class MongoContext {
     constructor() {
         this.db = null;
+    }
+
+    toObjectId(_id) {
+        return new mongodb.ObjectID(_id);
     }
 
     connect() {

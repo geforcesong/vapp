@@ -1,4 +1,4 @@
 export default {
-    categoryList: state => state.cagegories,
+    categoryList: state => state.categories,
     count: state => state.count
 };

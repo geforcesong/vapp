@@ -32,14 +32,16 @@ class CategoryFactory {
         const category = new Category(body);
         await this.collection.updateOne(
             {
-                _id: this.collection.toID(category._id)
+                _id: mongoContext.toObjectId(category._id)
             },
             {
-                name: category.name,
-                parentId: category.parentId,
-                isActive: category.isActive,
-                sortOrder: category.sortOrder,
-                updatedTime: new Date()
+                $set: {
+                    name: category.name,
+                    parentId: category.parentId,
+                    isActive: category.isActive,
+                    sortOrder: category.sortOrder,
+                    updatedTime: new Date()
+                }
             }
         );
         return category;

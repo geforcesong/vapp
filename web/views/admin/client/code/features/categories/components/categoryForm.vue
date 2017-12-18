@@ -1,6 +1,9 @@
 <template lang="pug">
     el-dialog(:title="title" :visible.sync="displayDialog" size="tiny")
         el-input(v-model="categoryName" placeholder="Please input category name")
+        div
+          <el-radio v-model="isActive" :label="true">Active</el-radio>
+          <el-radio v-model="isActive" :label="false">Inactive</el-radio>
         
         div(class="buttonBox")
             el-button(type="primary" @click="save") OK
@@ -8,40 +11,54 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      _id: "",
       title: "",
       categoryName: "",
-      displayDialog: false
+      displayDialog: false,
+      isActive: true,
+      isEdit: false,
+      sortOrder: 1000
     };
   },
   methods: {
-    ...mapActions('categories', ['createCategory']),
+    ...mapActions("categories", ["createCategory","updateCategory"]),
     open(category) {
       this.isEdit = !!category;
-      if(!this.isEdit){
+      if (!this.isEdit) {
         this.title = "Create new category";
-        this.categoryName = '';
-      } else{
-        this.categoryName = category.categoryName;
+        this.categoryName = "";
+      } else {
+        this.title = "Edit category";
+        this.isActive = category.isActive;
+        this.categoryName = category.name;
+        this._id = category._id;
       }
       this.displayDialog = true;
     },
     save() {
       const category = {
+        _id: this._id,
         name: this.categoryName,
-        parentId: '',
-        isActive: true,
-        sortOrder: 10000
+        parentId: "",
+        isActive: this.isActive,
+        sortOrder: this.sortOrder
+      };
+      if (!this.isEdit) {
+        this.createCategory(category).then(c => {
+          this.displayDialog = false;
+        });
+      } else {
+        this.updateCategory(category).then(c => {
+          this.displayDialog = false;
+        });
       }
-      this.createCategory(category).then((c)=>{
-        this.displayDialog = false;
-      });
     },
     close() {
-        this.displayDialog = false;
+      this.displayDialog = false;
     }
   }
 };

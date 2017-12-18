@@ -14,6 +14,10 @@
                         el-table-column(prop="isActive" label="IsActive")
                         el-table-column(prop="sortOrder" label="Order")
                         el-table-column(prop="createdTime" label="Created Time" :formatter="formatDateTime")
+                        el-table-column
+                          template(slot-scope="scope")
+                              el-button(@click="editCategory(scope.row)" size="small" icon="el-icon-edit")
+                              el-button(size="small" icon="el-icon-delete" @click="deleteUser(scope.row)")
 </template>
 <script>
 import categoryForm from "./components/categoryForm";
@@ -24,6 +28,13 @@ export default {
     createCategory() {
       this.$refs.categoryForm.open();
       //return this.$store.commit('categories/increment');
+    },
+    editCategory(category) {
+      this.$refs.categoryForm.open(category);
+      //return this.$store.commit('categories/increment');
+    },
+    deleteCategory(){
+
     },
     formatDateTime(row, column) {
       var d = new Date(row.createdTime);
