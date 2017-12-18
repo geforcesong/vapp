@@ -1,4 +1,4 @@
-const ExtendableError = require('./ExtendableError');
+const ExtendableError = require('./extendableError');
 
 class MongoOperationError extends ExtendableError {
     constructor(message) {
