@@ -38,8 +38,12 @@ class apiCategoryController extends BaseController {
     async deleteCategory(req, res, next) {
         this.initialize(req, res, next);
         this.categoryFactory = new CategoryFactory();
-        const category = await this.categoryFactory.deleteCategory(req.body);
-        this.sendAPI(category);
+        try {
+            const category = await this.categoryFactory.deleteCategory(req.body);
+            this.sendAPI(category);
+        } catch (err) {
+            this.sendAPI(null, err);
+        }
     }
 }
 

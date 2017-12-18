@@ -60,10 +60,32 @@ async function updateCategory({ commit }, category) {
     });
 }
 
+async function deleteCategory({ commit }, category) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'DELETE',
+            url: `/api/categories/${category._id}`,
+            contentType: 'application/json',
+            data: JSON.stringify(category),
+            success: function (res) {
+                if (res) {
+                    if (res.status === 0) {
+                        commit('deleteCategory', res.result);
+                        return resolve(res.result);
+                    }
+                    return reject(res.error);
+                }
+            }
+        });
+    });
+}
+
+
 
 export default {
     updateCount,
     createCategory,
     loadCategory,
+    deleteCategory,
     updateCategory
 };

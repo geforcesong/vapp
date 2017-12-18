@@ -49,7 +49,7 @@ class CategoryFactory {
 
     async deleteCategory(body) {
         const category = new Category(body);
-        await this.collection.remove({ _id: this.collection.toID(category._id) });
+        await this.collection.remove({ _id: mongoContext.toObjectId(category._id) });
         return category;
     }
 }

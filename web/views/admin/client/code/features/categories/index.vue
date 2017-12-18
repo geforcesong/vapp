@@ -17,14 +17,14 @@
                         el-table-column
                           template(slot-scope="scope")
                               el-button(@click="editCategory(scope.row)" size="small" icon="el-icon-edit")
-                              el-button(size="small" icon="el-icon-delete" @click="deleteUser(scope.row)")
+                              el-button(size="small" icon="el-icon-delete" @click="deleteRow(scope.row)")
 </template>
 <script>
 import categoryForm from "./components/categoryForm";
 import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
-    ...mapActions("categories", ["updateCount", "loadCategory"]),
+    ...mapActions("categories", ["updateCount", "loadCategory", "deleteCategory"]),
     createCategory() {
       this.$refs.categoryForm.open();
       //return this.$store.commit('categories/increment');
@@ -33,8 +33,8 @@ export default {
       this.$refs.categoryForm.open(category);
       //return this.$store.commit('categories/increment');
     },
-    deleteCategory(){
-
+    deleteRow(category){
+      this.deleteCategory(category);
     },
     formatDateTime(row, column) {
       var d = new Date(row.createdTime);

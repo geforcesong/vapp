@@ -25,9 +25,18 @@ function updateCategory(state, category) {
     }
 }
 
+function deleteCategory(state, category) {
+    if (category) {
+        let ctFound = state.categories.findIndex((c) => {
+            return c._id === category._id;
+        });
+        state.categories.splice(ctFound, 1);
+    }
+}
 
 export default {
     increment,
     addCategory,
-    updateCategory
+    updateCategory,
+    deleteCategory
 };
