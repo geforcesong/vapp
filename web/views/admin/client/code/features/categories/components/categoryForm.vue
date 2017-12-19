@@ -31,6 +31,7 @@ export default {
       if (!this.isEdit) {
         this.title = "Create new category";
         this.categoryName = "";
+        this.isActive = true;
       } else {
         this.title = "Edit category";
         this.isActive = category.isActive;

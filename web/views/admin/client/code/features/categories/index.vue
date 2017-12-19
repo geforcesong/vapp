@@ -11,7 +11,7 @@
                 el-col(:span="24")
                     el-table(:data="categoryList" style="width: 100%")
                         el-table-column(prop="name" label="Name")
-                        el-table-column(prop="isActive" label="IsActive")
+                        el-table-column(prop="isActive" label="IsActive" :formatter="formatBoolean")
                         el-table-column(prop="sortOrder" label="Order")
                         el-table-column(prop="createdTime" label="Created Time" :formatter="formatDateTime")
                         el-table-column
@@ -46,6 +46,9 @@ export default {
     formatDateTime(row, column) {
       var d = new Date(row.createdTime);
       return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+    },
+    formatBoolean(row, column) {
+      return row.isActive.toString();
     }
   },
   computed: {
