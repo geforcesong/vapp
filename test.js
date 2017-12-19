@@ -1,16 +1,17 @@
-//const MongoOperationError = require('./utils/errors/mongoOperationError');
-//const ExtendableError = require('./utils/errors/extendableError');
-// try {
-//     throw new MongoOperationError('sdfs');
-// } catch (err) {
-//     console.log(err instanceof ExtendableError);
-// }
 
-const MongoOperationError = require('./utils/errors/mongoOperationError');
-const ExtendableError = require('./utils/errors/extendableError.js');
-
-try {
-    throw new MongoOperationError('sdfs');
-} catch (err) {
-    console.log(err instanceof ExtendableError);
+function b() {
+    return new Promise((resolve, reject) => {
+        resolve(5);
+    });
 }
+
+function test() {
+    return b().then((d)=>{
+        console.log(d);
+        return 77;
+    });
+}
+
+test().then(d => {
+    console.log(d);
+})

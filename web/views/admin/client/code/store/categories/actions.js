@@ -1,3 +1,5 @@
+import Ajaxer from '../../util/ajaxer';
+
 async function updateCount({ commit }, val) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -8,22 +10,25 @@ async function updateCount({ commit }, val) {
 }
 
 async function createCategory({ commit }, category) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            type: 'POST',
-            url: '/api/categories',
-            contentType: 'application/json',
-            data: JSON.stringify(category),
-            success: function (res) {
-                if (res) {
-                    if (res.status === 0) {
-                        commit('addCategory', res.result);
-                        return resolve(res.result);
-                    }
-                    return reject(res.error);
-                }
-            }
-        });
+    // return new Promise((resolve, reject) => {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/api/categories',
+    //         contentType: 'application/json',
+    //         data: JSON.stringify(category),
+    //         success: function (res) {
+    //             if (res) {
+    //                 if (res.status === 0) {
+    //                     commit('addCategory', res.result);
+    //                     return resolve(res.result);
+    //                 }
+    //                 return reject(res.error);
+    //             }
+    //         }
+    //     });
+    // });
+    return Ajaxer.ajax('/api/categories', category, { type: 'POST' }).then((ret) => {
+        commit('addCategory', ret);
     });
 }
 
