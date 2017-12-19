@@ -34,7 +34,14 @@ export default {
       //return this.$store.commit('categories/increment');
     },
     deleteRow(category){
-      this.deleteCategory(category);
+      this.$confirm(`Do you want to delete this category - ${category.name}?`, 'Confirmation', {
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
+          type: 'warning'
+        }).then(() => {
+          this.deleteCategory(category);
+        }).catch(() => {
+        });
     },
     formatDateTime(row, column) {
       var d = new Date(row.createdTime);
