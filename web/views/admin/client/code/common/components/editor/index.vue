@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import editorBus from "../../buses/editorBus";
+
 export default {
   data() {
     return {
@@ -13,7 +15,7 @@ export default {
   mounted() {
     this.loadEditor().then(editor => {
       editor.events.change.addListener(()=> {
-        console.log(editor.content.get());
+        editorBus.$emit("editor-changed", editor.content.get());
       });
     });
   },

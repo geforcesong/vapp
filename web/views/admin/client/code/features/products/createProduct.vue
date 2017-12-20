@@ -10,14 +10,21 @@
                         el-option(v-for="item in categoryList" :key="item._id" :label="item.name" :value="item._id")
                     div(style="margin:15px 0") Detail Description:
                     textIo(:styleObject="{'height':'600px'}" :initText="contentHTML")
+                    br
+                    br
+                    el-button(type="primary" @click="save") Save
 </template>
 <script>
 import textIo from "../../common/components/editor";
+import editorBus from "../../common/buses/editorBus";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   methods: {
-    ...mapActions("categories", ["loadCategory"])
+    ...mapActions("categories", ["loadCategory"]),
+    save(){
+        console.log(this.contentHTML);
+    }
   },
   computed: {
     ...mapGetters("categories", ["categoryList"])
@@ -32,8 +39,11 @@ export default {
   components: {
     textIo
   },
-  created(){
-      this.loadCategory();
+  created() {
+    this.loadCategory();
+    editorBus.$on("editor-changed", content => {
+      this.contentHTML = content;
+    });
   }
 };
 </script>
