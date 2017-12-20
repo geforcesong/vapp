@@ -1,12 +1,30 @@
 <template lang="pug">
-    el-container
-        textIo
+el-container
+    el-header
+        h1 Products
+    el-main
+        el-row
+            el-col(:span="24")
+                el-button(type="primary", @click="createProduct") Create new product
 </template>
 <script>
-import textIo from "../../common/components/editor";
 export default {
-  components: {
-    textIo
+  methods: {
+    createProduct() {
+      this.$router.push("/admin/products/create");
+    }
   }
-}
+};
 </script>
+<style lang="scss" scoped>
+.el-container {
+  margin-left: 10px;
+}
+.el-header {
+  padding: 0px;
+  line-height: 60px;
+}
+.el-main{
+    padding: 0px;
+}
+</style>

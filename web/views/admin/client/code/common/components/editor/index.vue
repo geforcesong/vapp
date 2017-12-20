@@ -1,11 +1,17 @@
 <template lang="pug">
-    textarea(id="textioarea")
+    textarea(id="textioarea" :style="styleObject") {{content}}
 </template>
 
 <script>
 export default {
+  data() {
+    this.content = "";
+  },
+  props: ["styleObject", "initText"],
+  created() {
+    this.content = this.initText;
+  },
   mounted() {
-    alert("asd");
     this.loadEditor().then(editor => {});
   },
   methods: {

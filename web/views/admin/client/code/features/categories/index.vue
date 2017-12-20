@@ -2,7 +2,7 @@
     el-container
         categoryForm(ref="categoryForm")
         el-header
-            h1 Categories{{count}}
+            h1 Categories
         el-main
             el-row
                 el-col(:span="24")
