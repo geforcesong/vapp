@@ -10,8 +10,22 @@ class ProductFactory {
     }
 
     async getProducts(query) {
-        const products = await this.collection.find().toArray();
+        const products = await this.collection.find().project({
+            _id: true,
+            createdTime: true,
+            name: true,
+            isActive: true,
+            categories: true
+        }).toArray();
         return products;
+    }
+
+    async getProductById(id) {
+        const products = await this.collection.find({ _id: id }).toArray();
+        if (products && products.length) {
+            return products[0];
+        }
+        return null;
     }
 
     async createProduct(body) {

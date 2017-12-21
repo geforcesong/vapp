@@ -12,6 +12,14 @@ class apiProductController extends BaseController {
         this.sendAPI(products);
     }
 
+    async getProductById(req, res, next) {
+        this.initialize(req, res, next);
+        const productFactory = new ProductFactory();
+        const id = req.params.id;
+        const product = await productFactory.getProductById(id);
+        this.sendAPI(product);
+    }
+
     async createProduct(req, res, next) {
         this.initialize(req, res, next);
         const productFactory = new ProductFactory();

@@ -8,6 +8,7 @@ class ProductRouteManager extends BaseRouteManager {
 
     register() {
         this._registerOne('get', '/api/products', new ProductController(), 'getProducts');
+        this._registerOne('get', '/api/products/:id', new ProductController(), 'getProductById');
         this._registerOne('post', '/api/products', new ProductController(), 'createProduct');
         this._registerOne('put', '/api/products/:id', new ProductController(), 'updateProduct');
         this._registerOne('delete', '/api/products/:id', new ProductController(), 'deleteProduct');
