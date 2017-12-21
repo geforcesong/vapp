@@ -17,7 +17,7 @@ async function createCategory({commit}, category) {
 }
 
 
-async function loadCategory({commit}, category) {
+async function loadCategory({commit}) {
     return Ajaxer.ajax('/api/categories').then(ret =>{
         commit('addCategory', ret);
         return ret;

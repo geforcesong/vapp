@@ -11,6 +11,10 @@
                     div(style="margin:15px 0") Detail Description:
                     textIo(:styleObject="{'height':'600px'}" :initText="contentHTML" @editorChanged="updateEditorContent")
                     br
+                    div
+                        span(style="padding:5px;") Is Active:
+                        el-switch(v-model="isActive" active-color="#13ce66" inactive-color="#ff4949")
+                    br
                     br
                     el-button(type="primary" @click="save") Save
 </template>
@@ -41,7 +45,7 @@ export default {
         contentHTML: this.contentHTML
       };
       this.createProduct(product).then(p => {
-        console.log("success");
+        this.$router.push("/admin/products/");
       });
     }
   },
@@ -52,7 +56,8 @@ export default {
     return {
       contentHTML: "",
       productName: "",
-      productCategories: []
+      productCategories: [],
+      isActive: true
     };
   },
   components: {

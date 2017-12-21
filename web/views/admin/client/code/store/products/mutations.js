@@ -8,6 +8,11 @@ function addProduct(state, products) {
     }
 }
 
+function clearProducts(state) {
+    state.products = [];
+}
+
 export default {
-    addProduct
+    addProduct,
+    clearProducts
 };

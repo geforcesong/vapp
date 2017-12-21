@@ -7,6 +7,14 @@ async function createProduct({commit}, category) {
     });
 }
 
+async function loadProduct({commit}) {
+    commit('clearProducts');
+    return Ajaxer.ajax('/api/products').then(ret =>{
+        commit('addProduct', ret);
+        return ret;
+    });
+}
 export default {
-    createProduct
+    createProduct,
+    loadProduct
 };
