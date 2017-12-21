@@ -22,8 +22,18 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
     ...mapActions("categories", ["loadCategory"]),
-    save(){
-        console.log(this.contentHTML);
+    ...mapActions("products", ["createProduct"]),
+    save() {
+      const product = {
+        _id: this._id,
+        name: this.productName,
+        categories: this.productCategories,
+        isActive: this.isActive,
+        contentHTML: this.contentHTML
+      };
+      this.createProduct(product).then((p)=>{
+          console.log('success');
+      });
     }
   },
   computed: {
@@ -31,7 +41,7 @@ export default {
   },
   data() {
     return {
-      contentHTML: "aaa",
+      contentHTML: "",
       productName: "",
       productCategories: []
     };

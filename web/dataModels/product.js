@@ -4,6 +4,7 @@ class Product extends BaseData {
         super(raw);
         this.name = raw.name;
         this.isActive = raw.isActive;
+        this.categories = raw.categories;
         this.contentHTML = raw.contentHTML;
         this.createdTime = raw.createdTime;
     }
