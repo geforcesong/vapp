@@ -1,3 +1,4 @@
 module.exports.COLLECTIONNAMES = {
-    Categories: 'vappCategories'
+    Categories: 'vappCategories',
+    Products: 'vappProducts'
 };

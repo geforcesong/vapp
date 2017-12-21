@@ -3,6 +3,7 @@ const AboutController = require('../../web/controllers/aboutController.js');
 const AdminController = require('../../web/controllers/adminController.js');
 const BaseRouteManager = require('./BaseRouteManager');
 const CategoryRouteManager = require('./api/CategoryRouteManager');
+const ProductRouteManager = require('./api/ProductRouteManager');
 
 class RouteManager extends BaseRouteManager {
     constructor(app) {
@@ -18,6 +19,7 @@ class RouteManager extends BaseRouteManager {
 
     registerForAPI() {
         new CategoryRouteManager(this.app).register();
+        new ProductRouteManager(this.app).register();
     }
 }
 
