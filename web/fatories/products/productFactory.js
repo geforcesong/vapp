@@ -61,7 +61,7 @@ class ProductFactory {
         return product;
     }
 
-    async deleteCategory(body) {
+    async deleteProduct(body) {
         const product = new Product(body);
         await this.collection.remove({ _id: mongoContext.toObjectId(product._id) });
         return product;

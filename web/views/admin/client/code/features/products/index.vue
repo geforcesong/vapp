@@ -16,7 +16,7 @@ el-container
                     el-table-column
                         template(slot-scope="scope")
                             el-button(size="small" icon="el-icon-edit" @click="editProduct(scope.row)")
-                            el-button(size="small" icon="el-icon-delete")
+                            el-button(size="small" icon="el-icon-delete" @click="deleteRow(scope.row)")
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
@@ -25,7 +25,7 @@ export default {
     ...mapGetters("products", ["productList"])
   },
   methods: {
-    ...mapActions("products", ["loadProduct"]),
+    ...mapActions("products", ["loadProduct", "deleteProduct", "updateProduct"]),
     createProduct() {
       this.$router.push("/admin/products/create");
     },
@@ -49,8 +49,21 @@ export default {
       }
       return cname;
     },
-    editProduct(row){
-        this.$router.push(`/admin/products/${row._id}`);
+    editProduct(row) {
+      this.$router.push(`/admin/products/${row._id}`);
+    },
+    deleteRow(product) {
+      this.$confirm(
+        `Do you want to delete this product - ${product.name}?`,
+        "Confirmation",
+        {
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+          type: "warning"
+        }
+      ).then(() => {
+          this.deleteProduct(product);
+        }).catch(() => {});
     }
   },
   created() {

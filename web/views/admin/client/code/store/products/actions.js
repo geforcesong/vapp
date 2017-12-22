@@ -21,8 +21,24 @@ async function loadProductById({ commit }, id) {
     });
 }
 
+async function updateProduct({commit}, product) {
+    return Ajaxer.ajax(`/api/products/${product._id}`, product, {type: 'PUT'}).then((ret) => {
+        commit('updateProduct', ret);
+        return ret;
+    });
+}
+
+async function deleteProduct({commit}, product) {
+    return Ajaxer.ajax(`/api/products/${product._id}`, product, {type: 'DELETE'}).then((ret) => {
+        commit('deleteProduct', ret);
+        return ret;
+    });
+}
+
 export default {
     createProduct,
     loadProduct,
-    loadProductById
+    loadProductById,
+    updateProduct,
+    deleteProduct
 };

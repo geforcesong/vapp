@@ -26,7 +26,11 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
     ...mapActions("categories", ["loadCategory"]),
-    ...mapActions("products", ["createProduct", "loadProductById"]),
+    ...mapActions("products", [
+      "createProduct",
+      "loadProductById",
+      "updateProduct"
+    ]),
     cancel() {
       this.$router.push("/admin/products/");
     },
@@ -48,7 +52,12 @@ export default {
         isActive: this.isActive,
         contentHTML: this.contentHTML
       };
-      this.createProduct(product).then(p => {
+
+      let operationPromise = this.createProduct(product);
+      if (this.editingId) {
+        operationPromise = this.updateProduct(product);
+      }
+      operationPromise.then(p => {
         this.$router.push("/admin/products/");
       });
     },
