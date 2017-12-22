@@ -1,17 +1,27 @@
+class MyPromise {
+    constructor(fn) {
+        this.value = null;
+        this.callback = null;
+        fn(this.resolve);
+    }
 
-function b() {
-    return new Promise((resolve, reject) => {
-        resolve(5);
-    });
+    resolve() {
+        this.callback(this.value);
+    }
+
+    then(onFulfilled) {
+        this.callback = onFulfilled;
+    }
 }
 
 function test() {
-    return b().then((d)=>{
-        console.log(d);
-        return 77;
+    return new MyPromise((resolve) => {
+        setTimeout(function () {
+            console.log(100);
+        }, 1000);
     });
 }
 
-test().then(d => {
-    console.log(d);
-})
+test().then((d)=>{
+    console.log('done');
+});

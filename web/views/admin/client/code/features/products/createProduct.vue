@@ -46,20 +46,22 @@ export default {
         });
       }
       const product = {
-        _id: this._id,
+        _id: this.editingId || this._id,
         name: this.productName,
         categories: selectedCategories,
         isActive: this.isActive,
         contentHTML: this.contentHTML
       };
 
-      let operationPromise = this.createProduct(product);
       if (this.editingId) {
-        operationPromise = this.updateProduct(product);
+        this.updateProduct(product).then(p => {
+          this.cancel();
+        });
+      } else {
+        this.createProduct(product).then(p => {
+          this.cancel();
+        });
       }
-      operationPromise.then(p => {
-        this.$router.push("/admin/products/");
-      });
     },
     loadForEdit(id) {
       if (!id) {
