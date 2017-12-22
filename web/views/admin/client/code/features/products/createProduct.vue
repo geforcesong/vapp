@@ -1,7 +1,7 @@
 <template lang="pug">
     el-container
         el-header
-                h1 Create new product
+                h1 {{title}}
         el-main
             el-row
                 el-col(:span="24")
@@ -17,6 +17,7 @@
                     br
                     br
                     el-button(type="primary" @click="save") Save
+                    el-button(@click="cancel") Cancel
 </template>
 <script>
 import textIo from "../../common/components/editor";
@@ -25,7 +26,10 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
     ...mapActions("categories", ["loadCategory"]),
-    ...mapActions("products", ["createProduct"]),
+    ...mapActions("products", ["createProduct", "loadProductById"]),
+    cancel() {
+      this.$router.push("/admin/products/");
+    },
     updateEditorContent(content) {
       this.contentHTML = content;
     },
@@ -47,6 +51,23 @@ export default {
       this.createProduct(product).then(p => {
         this.$router.push("/admin/products/");
       });
+    },
+    loadForEdit(id) {
+      if (!id) {
+        return;
+      }
+      this.loadProductById(id).then(ret => {
+        this.contentHTML = ret.contentHTML;
+        this.productName = ret.name;
+        this.productCategories = ret.categories;
+        this.isActive = ret.isActive;
+      });
+    },
+    clearInput() {
+      this.contentHTML = "";
+      this.productName = "";
+      this.productCategories = [];
+      this.isActive = true;
     }
   },
   computed: {
@@ -54,17 +75,25 @@ export default {
   },
   data() {
     return {
+      title: "Create new product",
       contentHTML: "",
       productName: "",
       productCategories: [],
-      isActive: true
+      isActive: true,
+      editingId: "" // in editing mode if it has values
     };
   },
   components: {
     textIo
   },
   created() {
+    this.clearInput();
     this.loadCategory();
+    this.editingId = this.$route.params.id;
+    if (this.editingId) {
+      this.title = "Editing product";
+      this.loadForEdit(this.editingId);
+    }
   }
 };
 </script>

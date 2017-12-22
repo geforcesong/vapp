@@ -2,6 +2,10 @@ function increment(state, status) {
     state.count++;
 }
 
+function clearCategory(state) {
+    state.categories = [];
+}
+
 function addCategory(state, categories) {
     if (categories) {
         if (Array.isArray(categories)) {
@@ -38,5 +42,6 @@ export default {
     increment,
     addCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    clearCategory
 };

@@ -15,7 +15,7 @@ el-container
                     el-table-column(prop="createdTime" label="Created Time" :formatter="formatDateTime")
                     el-table-column
                         template(slot-scope="scope")
-                            el-button(size="small" icon="el-icon-edit")
+                            el-button(size="small" icon="el-icon-edit" @click="editProduct(scope.row)")
                             el-button(size="small" icon="el-icon-delete")
 </template>
 <script>
@@ -48,6 +48,9 @@ export default {
         });
       }
       return cname;
+    },
+    editProduct(row){
+        this.$router.push(`/admin/products/${row._id}`);
     }
   },
   created() {

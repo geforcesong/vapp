@@ -18,6 +18,7 @@ async function createCategory({commit}, category) {
 
 
 async function loadCategory({commit}) {
+    commit('clearCategory');
     return Ajaxer.ajax('/api/categories').then(ret =>{
         commit('addCategory', ret);
         return ret;

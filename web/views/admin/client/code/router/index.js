@@ -15,6 +15,7 @@ export function createRouter() {
             {path: '/admin/categories', component: category},
             {path: '/admin/products', component: product},
             {path: '/admin/products/create', component: productCreate},
+            {path: '/admin/products/:id', component: productCreate},
             {path: '*', redirect: '/admin/products'}
         ]
     });

@@ -21,7 +21,7 @@ class ProductFactory {
     }
 
     async getProductById(id) {
-        const products = await this.collection.find({ _id: id }).toArray();
+        const products = await this.collection.find({ _id: mongoContext.toObjectId(id) }).toArray();
         if (products && products.length) {
             return products[0];
         }
