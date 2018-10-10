@@ -19,7 +19,7 @@ class Server {
         expressError(this.app);
     }
     async run() {
-        await mongoContext.connect();
+        // await mongoContext.connect();
 
         this.app.listen(3000, function () {
             console.log('Typtscript Example app listening on port 3000!');
